@@ -9,11 +9,13 @@ CONFIG_FILE = os.path.expanduser("~/.config/niri/cfg/display.kdl")
 CACHE_FILE = os.path.expanduser("~/.config/niri/cfg/display_cache.json")
 WALLPAPER_SCRIPT = os.path.expanduser("~/.config/niri/launch-wallpaper.sh")
 
+WALLPAPER_ENGINE_COMMAND = "linux-wallpaperengine" # Change this if it's not in your PATH or you have it somewhere else
+
+# Map your monitor hardware names to your Steam Workshop Wallpaper IDs
 WALLPAPERS = {
-    "HP Inc. OMEN 34c CNC3492SD6": "3373381434",
-    "PNP(XXX) AAA Unknown": "1979650342",
-    "PNP(AOC) U2879G6 0x00000426": "2940771066",
-    "Samsung Electric Company SAMSUNG 0x01000E00": "2183937834"
+    # Example:
+    # "HP Inc. OMEN 34c CNC3492SD6": "3373381434",
+    # "Samsung Electric Company SAMSUNG 0x01000E00": "2183937834"
 }
 
 def load_cache():
@@ -102,8 +104,7 @@ def generate_kdl(all_outputs):
     return "\n".join(lines)
 
 def generate_wallpaper_script(active_outputs):
-    args = ["/home/deggio/Projects/linux-wallpaperengine/build/output/linux-wallpaperengine", 
-            "--layer", "background", "--disable-particles"]
+    args = [WALLPAPER_ENGINE_COMMAND, "--layer", "background", "--disable-particles"]
     for name, out in active_outputs.items():
         if name in WALLPAPERS and 'port' in out:
             args.extend(["--screen-root", out['port'], "--bg", WALLPAPERS[name]])

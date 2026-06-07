@@ -3,7 +3,7 @@ Description=Linux Wallpaper Engine
 PartOf=graphical-session.target
 
 [Service]
-ExecStart=/home/deggio/.config/niri/launch-wallpaper.sh
+ExecStart=%h/.config/niri/launch-wallpaper.sh
 Restart=on-failure
 RestartSec=3
 

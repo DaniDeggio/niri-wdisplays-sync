@@ -19,8 +19,10 @@ chmod +x install.sh
 ```
 
 ## Wallpaper Configuration
-To assign your screens to your desired wallpapers, open `niri-wdisplays-sync.py` before installing and update the `WALLPAPERS` dictionary:
+To assign your screens to your desired wallpapers, open `niri-wdisplays-sync.py` before installing and update the `WALLPAPER_ENGINE_COMMAND` and `WALLPAPERS` dictionary:
 ```python
+WALLPAPER_ENGINE_COMMAND = "linux-wallpaperengine" # Change this if it's not in your PATH
+
 WALLPAPERS = {
     "Your Monitor Hardware Name": "STEAM_WORKSHOP_ID",
 }
