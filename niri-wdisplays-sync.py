@@ -121,7 +121,7 @@ def main():
 
     cache = load_cache()
     last_active_names = set()
-    print("Avvio sincronizzazione intelligente niri <-> wdisplays...")
+    print("Starting smart synchronization niri <-> wdisplays...")
     
     while True:
         try:
@@ -133,12 +133,12 @@ def main():
             current_active_names = set(active_outputs.keys())
             layout_changed = False
             
-            # Se uno schermo viene collegato o scollegato, forziamo un aggiornamento
+            # If a screen is connected or disconnected, force an update
             if current_active_names != last_active_names:
                 layout_changed = True
                 last_active_names = current_active_names
 
-            # Identifica se qualche configurazione interna è cambiata
+            # Identify if any internal configuration has changed
             for name, out in active_outputs.items():
                 if name not in cache or cache[name] != out:
                     cache[name] = out
@@ -151,16 +151,16 @@ def main():
                 with open(CONFIG_FILE, 'w') as f:
                     f.write(new_kdl)
                 last_kdl = new_kdl
-                print("Layout o configurazione porte cambiata! Aggiorno e riavvio...", CONFIG_FILE)
+                print("Layout or port configuration changed! Updating and restarting...", CONFIG_FILE)
                 
-                # Rigenera lo script dei wallpaper con le porte attuali (DP-1, ecc)
+                # Regenerate wallpaper script with current ports (DP-1, etc)
                 generate_wallpaper_script(active_outputs)
                 
-                # Riavvia il servizio wallpaper
+                # Restart wallpaper service
                 subprocess.run(["systemctl", "--user", "restart", "linux-wallpaperengine.service"])
                 
         except Exception as e:
-            print("Errore:", e)
+            print("Error:", e)
         
         time.sleep(3)
 

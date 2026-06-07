@@ -9,23 +9,23 @@ mkdir -p "$NIRI_DIR/cfg"
 mkdir -p "$SYSTEMD_DIR"
 
 # Copy python script
-echo "Installando niri-wdisplays-sync.py in $NIRI_DIR..."
+echo "Installing niri-wdisplays-sync.py in $NIRI_DIR..."
 cp niri-wdisplays-sync.py "$NIRI_DIR/"
 chmod +x "$NIRI_DIR/niri-wdisplays-sync.py"
 
 # Copy systemd services
-echo "Installando i servizi systemd in $SYSTEMD_DIR..."
+echo "Installing systemd services in $SYSTEMD_DIR..."
 cp niri-wdisplays-sync.service "$SYSTEMD_DIR/"
 cp linux-wallpaperengine.service "$SYSTEMD_DIR/"
 
 # Reload systemd and enable services
-echo "Ricaricando e abilitando i servizi systemd..."
+echo "Reloading and enabling systemd services..."
 systemctl --user daemon-reload
 systemctl --user enable --now niri-wdisplays-sync.service
 systemctl --user enable --now linux-wallpaperengine.service
 
 echo ""
-echo "=== INSTALLAZIONE COMPLETATA ==="
-echo "Assicurati che il tuo file $NIRI_DIR/config.kdl includa la riga:"
+echo "=== INSTALLATION COMPLETE ==="
+echo "Make sure your $NIRI_DIR/config.kdl file includes the line:"
 echo 'include "./cfg/display.kdl"'
-echo "e rimuovi le eventuali vecchie configurazioni hardware (output) degli schermi presenti nel file principale."
+echo "and remove any old hardware configurations (output blocks) present in the main config file."

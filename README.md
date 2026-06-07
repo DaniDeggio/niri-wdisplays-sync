@@ -1,28 +1,28 @@
 # Niri Wdisplays Sync
 
-Questo tool colma il divario tra `wdisplays` e **Niri** (compositor Wayland), rendendo permanenti i layout degli schermi generati dinamicamente, garantendo anche un'integrazione perfetta con **linux-wallpaperengine**.
+This tool bridges the gap between `wdisplays` and **Niri** (Wayland compositor), making dynamically generated display layouts permanent, while also ensuring seamless integration with **linux-wallpaperengine**.
 
-## Problema
-Quando scolleghi o scambi un monitor, Niri resetta il layout oppure applica quello di default. Inoltre `linux-wallpaperengine` richiede nomi delle porte (`DP-1`, ecc.) per funzionare e, se queste vengono scambiate, lo sfondo sballa.
+## The Problem
+When you disconnect or swap a monitor, Niri resets the layout or applies its default one. Furthermore, `linux-wallpaperengine` requires port names (`DP-1`, etc.) to work correctly. If these ports are swapped, the wallpapers get assigned to the wrong physical screens.
 
-## Soluzione
-Questo demone in Python:
-1. Salva la posizione, risoluzione e configurazione di ogni schermo (in base al suo EDID hardware unico, indipendentemente dalla porta!).
-2. Se un monitor viene disconnesso, se ne ricorda. Quando lo ricolleghi in un'altra porta, lo rimette subito nella sua posizione salvata.
-3. Associa ad ogni monitor hardware un ID di sfondo specifico e rigenera al volo il comando corretto per `linux-wallpaperengine`, a prescindere da quale porta fisica sia connessa!
+## The Solution
+This Python daemon solves both issues:
+1. It saves the position, resolution, and configuration of each screen (based on its unique EDID hardware identifier, totally independent of the port!).
+2. If a monitor is disconnected, the daemon remembers it. When you plug it back into any port, it instantly snaps back to its saved position.
+3. It maps each hardware monitor to a specific wallpaper ID and dynamically regenerates the correct command for `linux-wallpaperengine` on the fly, regardless of which physical port the screen is connected to!
 
-## Installazione
-Clona la repository ed esegui lo script di installazione:
+## Installation
+Clone the repository and run the installation script:
 ```bash
 chmod +x install.sh
 ./install.sh
 ```
 
-## Configurazione Sfondi
-Per associare i tuoi schermi agli sfondi desiderati, prima dell'installazione apri `niri-wdisplays-sync.py` e aggiorna il dizionario `WALLPAPERS`:
+## Wallpaper Configuration
+To assign your screens to your desired wallpapers, open `niri-wdisplays-sync.py` before installing and update the `WALLPAPERS` dictionary:
 ```python
 WALLPAPERS = {
-    "Il Nome Del Tuo Schermo": "ID_WORKSHOP_STEAM",
+    "Your Monitor Hardware Name": "STEAM_WORKSHOP_ID",
 }
 ```
-Puoi trovare il "Nome" eseguendo `niri msg outputs` da terminale.
+You can find your monitor's "Hardware Name" by running `niri msg outputs` in your terminal.
