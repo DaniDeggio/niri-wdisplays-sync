@@ -13,6 +13,12 @@ echo "Installing niri-wdisplays-sync.py in $NIRI_DIR..."
 cp niri-wdisplays-sync.py "$NIRI_DIR/"
 chmod +x "$NIRI_DIR/niri-wdisplays-sync.py"
 
+# Install CLI tool
+echo "Installing niri-wallpaper CLI in $HOME/.local/bin..."
+mkdir -p "$HOME/.local/bin"
+cp niri-wallpaper.py "$HOME/.local/bin/niri-wallpaper"
+chmod +x "$HOME/.local/bin/niri-wallpaper"
+
 # Copy systemd services
 echo "Installing systemd services in $SYSTEMD_DIR..."
 cp niri-wdisplays-sync.service "$SYSTEMD_DIR/"

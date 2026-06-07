@@ -19,12 +19,15 @@ chmod +x install.sh
 ```
 
 ## Wallpaper Configuration
-To assign your screens to your desired wallpapers, open `niri-wdisplays-sync.py` before installing and update the `WALLPAPER_ENGINE_COMMAND` and `WALLPAPERS` dictionary:
-```python
-WALLPAPER_ENGINE_COMMAND = "linux-wallpaperengine" # Change this if it's not in your PATH
+You no longer need to edit Python scripts or note down hardware EDIDs manually! A handy CLI tool is included:
 
-WALLPAPERS = {
-    "Your Monitor Hardware Name": "STEAM_WORKSHOP_ID",
-}
-```
-You can find your monitor's "Hardware Name" by running `niri msg outputs` in your terminal.
+- List connected screens and their assignments:
+  ```bash
+  niri-wallpaper list
+  ```
+- Assign a Steam Workshop wallpaper ID to a screen by its port (e.g. DP-1):
+  ```bash
+  niri-wallpaper set DP-1 3373381434
+  ```
+
+The tool will automatically resolve the physical port to its permanent hardware EDID identifier, save the assignment, and restart the daemon so the new wallpaper appears instantly!
