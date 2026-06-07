@@ -1,0 +1,11 @@
+[Unit]
+Description=Linux Wallpaper Engine
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/home/deggio/.config/niri/launch-wallpaper.sh
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

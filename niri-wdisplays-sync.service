@@ -1,0 +1,11 @@
+[Unit]
+Description=Sync Niri displays with wdisplays
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/home/deggio/.config/niri/niri-wdisplays-sync.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
