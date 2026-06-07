@@ -25,6 +25,10 @@ You no longer need to edit Python scripts or note down hardware EDIDs manually! 
   ```bash
   niri-wallpaper list
   ```
+- Browse your downloaded Steam Workshop wallpapers:
+  ```bash
+  niri-wallpaper wallpapers
+  ```
 - Assign a Steam Workshop wallpaper ID to a screen by its port (e.g. DP-1):
   ```bash
   niri-wallpaper set DP-1 3373381434
